@@ -14,6 +14,36 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
+const htmlSummary = `<div style="font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; line-height: 1.8; color: #334155;">
+  <p style="font-size: 1.2rem; color: #059669; font-weight: bold; text-align: center; margin-bottom: 2rem;">
+    Selamat datang di petualangan Bahasa Indonesia! 📚✍️<br/>Mari kita jelajahi dunia teks, cerita, dan makna kata!
+  </p>
+  <div style="background: #fdf2f8; border-left: 6px solid #ec4899; padding: 2rem; border-radius: 1.5rem; margin-bottom: 2rem;">
+    <h3 style="color: #be185d; margin-top: 0; font-size: 1.5rem; border-bottom: 2px dashed #fbcfe8; padding-bottom: 1rem;">📖 Membaca Pemahaman & Teks</h3>
+    <ul>
+      <li><b>Gagasan Pokok:</b> Ide utama yang menjadi inti dari suatu paragraf. Biasanya terletak di awal (deduktif) atau di akhir (induktif).</li>
+      <li><b>Teks Eksplanasi:</b> Teks yang menjelaskan proses terjadinya sesuatu (sebab-akibat).</li>
+      <li><b>Teks Persuasi:</b> Teks yang berisi ajakan, bujukan, atau imbauan untuk melakukan sesuatu.</li>
+    </ul>
+  </div>
+  <div style="background: #fef2f2; border-left: 6px solid #ef4444; padding: 2rem; border-radius: 1.5rem; margin-bottom: 2rem;">
+    <h3 style="color: #b91c1c; margin-top: 0; font-size: 1.5rem; border-bottom: 2px dashed #fecaca; padding-bottom: 1rem;">📝 Kaidah Kebahasaan</h3>
+    <ul>
+      <li><b>Sinonim:</b> Persamaan makna kata (contoh: pintar = pandai).</li>
+      <li><b>Antonim:</b> Lawan makna kata (contoh: panjang >< pendek).</li>
+      <li>Gunakan huruf kapital pada awal kalimat, nama orang, hari, bulan, dan nama tempat.</li>
+    </ul>
+  </div>
+  <div style="background: #eff6ff; border-left: 6px solid #3b82f6; padding: 2rem; border-radius: 1.5rem; margin-bottom: 2rem;">
+    <h3 style="color: #1d4ed8; margin-top: 0; font-size: 1.5rem; border-bottom: 2px dashed #bfdbfe; padding-bottom: 1rem;">🎭 Sastra (Puisi & Cerita)</h3>
+    <ul>
+      <li><b>Puisi:</b> Karya sastra yang terikat bait, baris, dan rima. Gunakan intonasi dan ekspresi saat membacanya.</li>
+      <li><b>Tokoh Utama:</b> Karakter yang paling banyak diceritakan dalam cerita.</li>
+      <li><b>Amanat:</b> Pesan moral yang ingin disampaikan pengarang kepada pembaca.</li>
+    </ul>
+  </div>
+</div>`;
+
 const questions = [
   {
     "id": "q_1",
@@ -26,7 +56,8 @@ const questions = [
       "Kalimat terakhir"
     ],
     "correctAnswer": 0,
-    "explanation_correct": "Kalimat pertama ('Pemanasan global menjadi isu yang sangat serius...') adalah gagasan utama."
+    "explanation_correct": "Kalimat pertama ('Pemanasan global menjadi isu yang sangat serius...') adalah gagasan utama.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Kalimat pertama ('Pemanasan global menjadi isu yang sangat serius...') adalah gagasan utama."
   },
   {
     "id": "q_2",
@@ -39,7 +70,8 @@ const questions = [
       "Berubah"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Meningkat sama artinya dengan bertambah naik/besar."
+    "explanation_correct": "Meningkat sama artinya dengan bertambah naik/besar.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Meningkat sama artinya dengan bertambah naik/besar."
   },
   {
     "id": "q_3",
@@ -52,7 +84,8 @@ const questions = [
       "Di mana kita bisa membuang sampah plastik?"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Paragraf membahas upaya-upaya menanggulangi sampah plastik."
+    "explanation_correct": "Paragraf membahas upaya-upaya menanggulangi sampah plastik.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Paragraf membahas upaya-upaya menanggulangi sampah plastik."
   },
   {
     "id": "q_4",
@@ -65,7 +98,8 @@ const questions = [
       "Lari adalah olahraga yang melelahkan"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Cerita Kelinci dan Kura-kura mengajarkan untuk tidak sombong."
+    "explanation_correct": "Cerita Kelinci dan Kura-kura mengajarkan untuk tidak sombong.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Cerita Kelinci dan Kura-kura mengajarkan untuk tidak sombong."
   },
   {
     "id": "q_5",
@@ -78,7 +112,8 @@ const questions = [
       "Bawang putih sedang bersedih"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Konflik adalah masalah utama yang dialami tokoh, yaitu hilangnya selendang."
+    "explanation_correct": "Konflik adalah masalah utama yang dialami tokoh, yaitu hilangnya selendang.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Konflik adalah masalah utama yang dialami tokoh, yaitu hilangnya selendang."
   },
   {
     "id": "q_6",
@@ -91,7 +126,8 @@ const questions = [
       "Alun-alun kota"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Medan laga adalah kiasan untuk tempat berperang/pertempuran."
+    "explanation_correct": "Medan laga adalah kiasan untuk tempat berperang/pertempuran.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Medan laga adalah kiasan untuk tempat berperang/pertempuran."
   },
   {
     "id": "q_7",
@@ -104,7 +140,8 @@ const questions = [
       "Sedangkan"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "'Oleh karena itu' menunjukkan akibat dari rajin belajar."
+    "explanation_correct": "'Oleh karena itu' menunjukkan akibat dari rajin belajar.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 'Oleh karena itu' menunjukkan akibat dari rajin belajar."
   },
   {
     "id": "q_8",
@@ -117,7 +154,8 @@ const questions = [
       "Larangan membuang sampah sama sekali"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Kalimat persuasif mengajak masyarakat membuang sampah di tempatnya."
+    "explanation_correct": "Kalimat persuasif mengajak masyarakat membuang sampah di tempatnya.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Kalimat persuasif mengajak masyarakat membuang sampah di tempatnya."
   },
   {
     "id": "q_9",
@@ -130,7 +168,8 @@ const questions = [
       "Budi belajar dengan rajin agar lulus ujian."
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Kata 'tetapi' adalah konjungsi majemuk setara berlawanan."
+    "explanation_correct": "Kata 'tetapi' adalah konjungsi majemuk setara berlawanan.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Kata 'tetapi' adalah konjungsi majemuk setara berlawanan."
   },
   {
     "id": "q_10",
@@ -143,7 +182,8 @@ const questions = [
       "Besok kemungkinan akan turun hujan lebat."
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Fakta adalah hal yang pasti dan dapat dibuktikan kebenarannya."
+    "explanation_correct": "Fakta adalah hal yang pasti dan dapat dibuktikan kebenarannya.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Fakta adalah hal yang pasti dan dapat dibuktikan kebenarannya."
   },
   {
     "id": "q_11",
@@ -156,7 +196,8 @@ const questions = [
       "Koda"
     ],
     "correctAnswer": 0,
-    "explanation_correct": "Tesis adalah pembuka teks eksposisi yang berisi opini penulis."
+    "explanation_correct": "Tesis adalah pembuka teks eksposisi yang berisi opini penulis.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Tesis adalah pembuka teks eksposisi yang berisi opini penulis."
   },
   {
     "id": "q_12",
@@ -169,7 +210,8 @@ const questions = [
       "Di hutan terdapat banyak oksigen."
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Inti informasi adalah peran hutan sebagai penghasil oksigen."
+    "explanation_correct": "Inti informasi adalah peran hutan sebagai penghasil oksigen.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Inti informasi adalah peran hutan sebagai penghasil oksigen."
   },
   {
     "id": "q_13",
@@ -182,7 +224,8 @@ const questions = [
       "Desa di hilir menyebabkan banjir."
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Sebab: penebangan liar. Akibat: banjir bandang."
+    "explanation_correct": "Sebab: penebangan liar. Akibat: banjir bandang.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Sebab: penebangan liar. Akibat: banjir bandang."
   },
   {
     "id": "q_14",
@@ -195,7 +238,8 @@ const questions = [
       "Penjual"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Kreator berarti orang yang membuat atau menciptakan sesuatu."
+    "explanation_correct": "Kreator berarti orang yang membuat atau menciptakan sesuatu.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Kreator berarti orang yang membuat atau menciptakan sesuatu."
   },
   {
     "id": "q_15",
@@ -208,7 +252,8 @@ const questions = [
       "Pesawat terbang tidak bisa mendarat."
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Awan hitam pekat dan angin kencang adalah tanda-tanda hujan badai."
+    "explanation_correct": "Awan hitam pekat dan angin kencang adalah tanda-tanda hujan badai.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Awan hitam pekat dan angin kencang adalah tanda-tanda hujan badai."
   },
   {
     "id": "q_16",
@@ -221,7 +266,8 @@ const questions = [
       "Penyebab utama hidup di kota."
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Inti teks adalah dampak membuang sampah sembarangan."
+    "explanation_correct": "Inti teks adalah dampak membuang sampah sembarangan.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Inti teks adalah dampak membuang sampah sembarangan."
   },
   {
     "id": "q_17",
@@ -234,7 +280,8 @@ const questions = [
       "Membahas tentang kucing dan anjing"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Kedua teks membahas hewan (kucing, kelinci) yang lucu untuk dipelihara."
+    "explanation_correct": "Kedua teks membahas hewan (kucing, kelinci) yang lucu untuk dipelihara.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Kedua teks membahas hewan (kucing, kelinci) yang lucu untuk dipelihara."
   },
   {
     "id": "q_18",
@@ -247,7 +294,8 @@ const questions = [
       "Surat itu telah memiliki izin resmi."
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Kata baku yang benar adalah 'praktik', bukan 'praktek'."
+    "explanation_correct": "Kata baku yang benar adalah 'praktik', bukan 'praktek'.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Kata baku yang benar adalah 'praktik', bukan 'praktek'."
   },
   {
     "id": "q_19",
@@ -260,7 +308,8 @@ const questions = [
       "Wah, baju yang kau kenakan sangat bagus,"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Kalimat seru/ungkapan kekaguman diakhiri dengan tanda seru (!)."
+    "explanation_correct": "Kalimat seru/ungkapan kekaguman diakhiri dengan tanda seru (!).",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Kalimat seru/ungkapan kekaguman diakhiri dengan tanda seru (!)."
   },
   {
     "id": "q_20",
@@ -273,7 +322,8 @@ const questions = [
       "Ajakan menghormati guru"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Teks secara jelas mengajak menjaga kebersihan sekolah."
+    "explanation_correct": "Teks secara jelas mengajak menjaga kebersihan sekolah.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Teks secara jelas mengajak menjaga kebersihan sekolah."
   },
   {
     "id": "q_21",
@@ -286,7 +336,8 @@ const questions = [
       "Saya akan pulang sekarang."
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Kalimat tersebut nyambung dengan ungkapan terima kasih dan kekompakan."
+    "explanation_correct": "Kalimat tersebut nyambung dengan ungkapan terima kasih dan kekompakan.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Kalimat tersebut nyambung dengan ungkapan terima kasih dan kekompakan."
   },
   {
     "id": "q_22",
@@ -299,7 +350,8 @@ const questions = [
       "Salam pembuka"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Ucapan permintaan maaf dan 'demikian' menandakan akhir/penutup pidato."
+    "explanation_correct": "Ucapan permintaan maaf dan 'demikian' menandakan akhir/penutup pidato.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Ucapan permintaan maaf dan 'demikian' menandakan akhir/penutup pidato."
   },
   {
     "id": "q_23",
@@ -312,7 +364,8 @@ const questions = [
       "Litotes"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Angin seolah-olah bisa berbisik (seperti manusia) adalah majas personifikasi."
+    "explanation_correct": "Angin seolah-olah bisa berbisik (seperti manusia) adalah majas personifikasi.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Angin seolah-olah bisa berbisik (seperti manusia) adalah majas personifikasi."
   },
   {
     "id": "q_24",
@@ -325,7 +378,8 @@ const questions = [
       "Ia adalah tangan kanan bosnya."
     ],
     "correctAnswer": 0,
-    "explanation_correct": "Hiperbola melebih-lebihkan sesuatu, seperti suara membelah angkasa."
+    "explanation_correct": "Hiperbola melebih-lebihkan sesuatu, seperti suara membelah angkasa.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Hiperbola melebih-lebihkan sesuatu, seperti suara membelah angkasa."
   },
   {
     "id": "q_25",
@@ -338,7 +392,8 @@ const questions = [
       "Bagai air di daun talas."
     ],
     "correctAnswer": 0,
-    "explanation_correct": "Makin berilmu/kaya makin rendah hati."
+    "explanation_correct": "Makin berilmu/kaya makin rendah hati.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Makin berilmu/kaya makin rendah hati."
   },
   {
     "id": "q_26",
@@ -351,7 +406,8 @@ const questions = [
       "Kutu buku"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Buah tangan berarti oleh-oleh."
+    "explanation_correct": "Buah tangan berarti oleh-oleh.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Buah tangan berarti oleh-oleh."
   },
   {
     "id": "q_27",
@@ -364,7 +420,8 @@ const questions = [
       "Wesel pos"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Formulir adalah lembar isian data diri."
+    "explanation_correct": "Formulir adalah lembar isian data diri.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Formulir adalah lembar isian data diri."
   },
   {
     "id": "q_28",
@@ -377,7 +434,8 @@ const questions = [
       "Siapa yang membantu Bapak?"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Pertanyaan 'sejak kapan' dijawab dengan 'sejak tahun 2010'."
+    "explanation_correct": "Pertanyaan 'sejak kapan' dijawab dengan 'sejak tahun 2010'.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Pertanyaan 'sejak kapan' dijawab dengan 'sejak tahun 2010'."
   },
   {
     "id": "q_29",
@@ -390,7 +448,8 @@ const questions = [
       "Kita harus pandai berenang"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Malin Kundang dikutuk karena durhaka kepada ibunya."
+    "explanation_correct": "Malin Kundang dikutuk karena durhaka kepada ibunya.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Malin Kundang dikutuk karena durhaka kepada ibunya."
   },
   {
     "id": "q_30",
@@ -403,77 +462,88 @@ const questions = [
       "Pemarah dan iri hati"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Bawang Putih digambarkan sebagai protagonis yang baik dan rajin."
+    "explanation_correct": "Bawang Putih digambarkan sebagai protagonis yang baik dan rajin.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Bawang Putih digambarkan sebagai protagonis yang baik dan rajin."
   },
   {
     "id": "q_31",
     "type": "essay",
     "question": "Sebutkan sebuah kalimat yang merupakan 'fakta' dan sebuah kalimat yang merupakan 'opini' terkait iklan komersial susu bernutrisi!",
     "correctAnswer": "Fakta: Susu X mengandung kalsium 500mg. Opini: Susu X adalah susu paling enak di dunia.",
-    "explanation_correct": "Fakta bisa diukur secara objektif, opini bersifat subjektif."
+    "explanation_correct": "Fakta bisa diukur secara objektif, opini bersifat subjektif.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Fakta bisa diukur secara objektif, opini bersifat subjektif."
   },
   {
     "id": "q_32",
     "type": "essay",
     "question": "Lengkapi baris isi pantun rumpang berikut ini!\nJalan-jalan ke pasar baru,\nJangan lupa membeli paku.\n...\n...",
     "correctAnswer": "Jika kamu rajin belajar selalau,\nPasti akan menjadi juara kelas satu.",
-    "explanation_correct": "Sajak harus a-b-a-b (ru - ku - ru/lu - ku/tu)."
+    "explanation_correct": "Sajak harus a-b-a-b (ru - ku - ru/lu - ku/tu).",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Sajak harus a-b-a-b (ru - ku - ru/lu - ku/tu)."
   },
   {
     "id": "q_33",
     "type": "essay",
     "question": "Apa informasi pokok yang biasanya terdapat pada infografik tentang 'Cara Mencuci Tangan yang Benar'?",
     "correctAnswer": "Langkah-langkah mencuci tangan dengan sabun dan air mengalir selama minimal 20 detik.",
-    "explanation_correct": "Informasi visual dan teks singkat yang informatif."
+    "explanation_correct": "Informasi visual dan teks singkat yang informatif.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Informasi visual dan teks singkat yang informatif."
   },
   {
     "id": "q_34",
     "type": "essay",
     "question": "Buatlah satu bait puisi (4 baris) dengan tema 'Pemandangan Alam' yang memiliki rima a-b-a-b dan menggunakan majas personifikasi!",
     "correctAnswer": "Pagi cerah matahari menyapa riang (a)\nGunung berdiri gagah menantang awan (b)\nAngin membelai dedaunan bergoyang (a)\nMenyambut burung yang terbang menawan (b)",
-    "explanation_correct": "Menyapa riang (personifikasi), rima a-b-a-b."
+    "explanation_correct": "Menyapa riang (personifikasi), rima a-b-a-b.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Menyapa riang (personifikasi), rima a-b-a-b."
   },
   {
     "id": "q_35",
     "type": "essay",
     "question": "Sebutkan 3 ciri utama dari kalimat yang digunakan dalam Teks Prosedur!",
     "correctAnswer": "1. Menggunakan kalimat perintah (imperatif). 2. Menggunakan kata kerja aktif. 3. Menggunakan kata penghubung (konjungsi) urutan.",
-    "explanation_correct": "Karakteristik kebahasaan teks prosedur."
+    "explanation_correct": "Karakteristik kebahasaan teks prosedur.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Karakteristik kebahasaan teks prosedur."
   },
   {
     "id": "q_36",
     "type": "essay",
     "question": "Tuliskan tanggapan pribadimu terhadap isi teks eksplanasi yang menjelaskan tentang bahaya dari kebiasaan begadang bagi remaja!",
     "correctAnswer": "Menurut saya, kebiasaan begadang memang sangat merugikan bagi kesehatan fisik dan konsentrasi belajar remaja, sehingga sebaiknya dihindari.",
-    "explanation_correct": "Tanggapan logis dan berkaitan dengan isi teks."
+    "explanation_correct": "Tanggapan logis dan berkaitan dengan isi teks.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Tanggapan logis dan berkaitan dengan isi teks."
   },
   {
     "id": "q_37",
     "type": "essay",
     "question": "Buatlah 3 pertanyaan menggunakan kata tanya (Adiksimba) berdasarkan pernyataan ini: 'Pemerintah daerah mengadakan lomba kebersihan antar RT pada hari Minggu pagi di Alun-alun Kota.'",
     "correctAnswer": "1. Siapa yang mengadakan lomba? 2. Kapan lomba tersebut diadakan? 3. Di mana lomba tersebut dilaksanakan?",
-    "explanation_correct": "Menggunakan kata tanya Siapa, Kapan, dan Di mana dengan tepat."
+    "explanation_correct": "Menggunakan kata tanya Siapa, Kapan, dan Di mana dengan tepat.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Menggunakan kata tanya Siapa, Kapan, dan Di mana dengan tepat."
   },
   {
     "id": "q_38",
     "type": "essay",
     "question": "Koreksilah kalimat berikut agar menjadi kalimat efektif: 'Para siswa-siswi sedang belajar di dalam ruang kelas.'",
     "correctAnswer": "'Siswa-siswi sedang belajar di ruang kelas.' ATAU 'Para siswa sedang belajar di ruang kelas.'",
-    "explanation_correct": "'Para' dan 'siswa-siswi' adalah bentuk jamak yang jika digabung menjadi pemborosan kata (pleonasme)."
+    "explanation_correct": "'Para' dan 'siswa-siswi' adalah bentuk jamak yang jika digabung menjadi pemborosan kata (pleonasme).",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 'Para' dan 'siswa-siswi' adalah bentuk jamak yang jika digabung menjadi pemborosan kata (pleonasme)."
   },
   {
     "id": "q_39",
     "type": "essay",
     "question": "Tentukan dan perbaiki kata-kata yang harus diawali huruf kapital pada kalimat undangan berikut: 'kami mengharapkan kehadiran bapak/ibu pada hari jumat di balai desa.'",
     "correctAnswer": "Kami mengharapkan kehadiran Bapak/Ibu pada hari Jumat di Balai Desa.",
-    "explanation_correct": "Huruf pertama awal kalimat (Kami), sapaan (Bapak/Ibu), hari (Jumat), nama tempat lembaga (Balai Desa)."
+    "explanation_correct": "Huruf pertama awal kalimat (Kami), sapaan (Bapak/Ibu), hari (Jumat), nama tempat lembaga (Balai Desa).",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Huruf pertama awal kalimat (Kami), sapaan (Bapak/Ibu), hari (Jumat), nama tempat lembaga (Balai Desa)."
   },
   {
     "id": "q_40",
     "type": "essay",
     "question": "Dalam cerita Sangkuriang, Sangkuriang gagal menyelesaikan syarat pembuatan perahu dan telaga sebelum fajar menyingsing. Prediksikan kejadian selanjutnya yang terjadi menurut cerita rakyat tersebut!",
     "correctAnswer": "Sangkuriang akan marah besar, lalu menendang perahu buatannya hingga terbalik dan berubah menjadi Gunung Tangkuban Perahu.",
-    "explanation_correct": "Ini adalah akhir legenda Sangkuriang."
+    "explanation_correct": "Ini adalah akhir legenda Sangkuriang.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Ini adalah akhir legenda Sangkuriang."
   }
 ];
 
@@ -483,7 +553,7 @@ async function insertSubject() {
     await setDoc(subjRef, {
       title: "Bahasa Indonesia",
       description: "Penilaian Sumatif Kelas Akhir (PSKA) Tahun Ajaran 2025/2026",
-      summary: "<p>Persiapkan diri untuk ujian.</p>",
+      summary: htmlSummary,
       questions: questions,
       isLocked: false
     });

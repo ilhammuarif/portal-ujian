@@ -14,6 +14,36 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
+const htmlSummary = `<div style="font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; line-height: 1.8; color: #334155;">
+  <p style="font-size: 1.2rem; color: #059669; font-weight: bold; text-align: center; margin-bottom: 2rem;">
+    Selamat datang di petualangan Matematika! 📐✖️<br/>Mari kita asah logika dan berhitung dengan teliti!
+  </p>
+  <div style="background: #f0fdf4; border-left: 6px solid #10b981; padding: 2rem; border-radius: 1.5rem; margin-bottom: 2rem;">
+    <h3 style="color: #047857; margin-top: 0; font-size: 1.5rem; border-bottom: 2px dashed #a7f3d0; padding-bottom: 1rem;">🧮 Operasi Bilangan & Pecahan</h3>
+    <ul>
+      <li>Dahulukan operasi perkalian dan pembagian sebelum penjumlahan dan pengurangan (KABATAKU).</li>
+      <li>Untuk penjumlahan pecahan berbeda penyebut, samakan penyebutnya menggunakan KPK terlebih dahulu.</li>
+      <li>Perkalian pecahan dilakukan dengan mengalikan pembilang dengan pembilang, dan penyebut dengan penyebut.</li>
+    </ul>
+  </div>
+  <div style="background: #fffbeb; border-left: 6px solid #f59e0b; padding: 2rem; border-radius: 1.5rem; margin-bottom: 2rem;">
+    <h3 style="color: #b45309; margin-top: 0; font-size: 1.5rem; border-bottom: 2px dashed #fde68a; padding-bottom: 1rem;">📏 Bangun Ruang & Geometri</h3>
+    <ul>
+      <li>Volume Kubus = Sisi × Sisi × Sisi (s³).</li>
+      <li>Volume Balok = Panjang × Lebar × Tinggi (p × l × t).</li>
+      <li>Perhatikan jaring-jaring bangun ruang untuk mengetahui bentuk asli setelah dilipat.</li>
+    </ul>
+  </div>
+  <div style="background: #eff6ff; border-left: 6px solid #3b82f6; padding: 2rem; border-radius: 1.5rem; margin-bottom: 2rem;">
+    <h3 style="color: #1d4ed8; margin-top: 0; font-size: 1.5rem; border-bottom: 2px dashed #bfdbfe; padding-bottom: 1rem;">📊 Pengolahan Data</h3>
+    <ul>
+      <li><b>Modus:</b> Nilai atau data yang paling sering muncul.</li>
+      <li><b>Median:</b> Nilai tengah setelah data diurutkan dari yang terkecil.</li>
+      <li><b>Rata-rata (Mean):</b> Jumlah seluruh data dibagi banyaknya data.</li>
+    </ul>
+  </div>
+</div>`;
+
 const questions = [
   {
     "id": "q_1",
@@ -26,7 +56,8 @@ const questions = [
       "6.577"
     ],
     "correctAnswer": 0,
-    "explanation_correct": "4.567 + 3.214 = 7.781. Kemudian 7.781 - 1.234 = 6.547."
+    "explanation_correct": "4.567 + 3.214 = 7.781. Kemudian 7.781 - 1.234 = 6.547.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 4.567 + 3.214 = 7.781. Kemudian 7.781 - 1.234 = 6.547."
   },
   {
     "id": "q_2",
@@ -39,7 +70,8 @@ const questions = [
       "4.301"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Total panen = 2.345 + 1.456 = 3.801. Apel bagus = 3.801 - 500 = 3.301."
+    "explanation_correct": "Total panen = 2.345 + 1.456 = 3.801. Apel bagus = 3.801 - 500 = 3.301.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Total panen = 2.345 + 1.456 = 3.801. Apel bagus = 3.801 - 500 = 3.301."
   },
   {
     "id": "q_3",
@@ -52,7 +84,8 @@ const questions = [
       "150"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "125 × 4 = 500. Kemudian 500 : 5 = 100."
+    "explanation_correct": "125 × 4 = 500. Kemudian 500 : 5 = 100.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 125 × 4 = 500. Kemudian 500 : 5 = 100."
   },
   {
     "id": "q_4",
@@ -65,7 +98,8 @@ const questions = [
       "64"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Total buku = 12 × 45 = 540. Buku tiap kardus = 540 : 10 = 54."
+    "explanation_correct": "Total buku = 12 × 45 = 540. Buku tiap kardus = 540 : 10 = 54.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Total buku = 12 × 45 = 540. Buku tiap kardus = 540 : 10 = 54."
   },
   {
     "id": "q_5",
@@ -78,7 +112,8 @@ const questions = [
       "2² × 3"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Faktorisasi 12 = 2² × 3. Faktorisasi 18 = 2 × 3². KPK = 2² × 3² = 36."
+    "explanation_correct": "Faktorisasi 12 = 2² × 3. Faktorisasi 18 = 2 × 3². KPK = 2² × 3² = 36.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Faktorisasi 12 = 2² × 3. Faktorisasi 18 = 2 × 3². KPK = 2² × 3² = 36."
   },
   {
     "id": "q_6",
@@ -91,7 +126,8 @@ const questions = [
       "18"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "FPB dari 24 dan 36 adalah 12. Jadi paling banyak 12 anak."
+    "explanation_correct": "FPB dari 24 dan 36 adalah 12. Jadi paling banyak 12 anak.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! FPB dari 24 dan 36 adalah 12. Jadi paling banyak 12 anak."
   },
   {
     "id": "q_7",
@@ -104,7 +140,8 @@ const questions = [
       "80"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "KPK dari 15 dan 20 adalah 60. Mereka menyala bersama tiap 60 detik."
+    "explanation_correct": "KPK dari 15 dan 20 adalah 60. Mereka menyala bersama tiap 60 detik.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! KPK dari 15 dan 20 adalah 60. Mereka menyala bersama tiap 60 detik."
   },
   {
     "id": "q_8",
@@ -117,7 +154,8 @@ const questions = [
       "8/3"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "3 bagian dari 8 bagian adalah 3/8."
+    "explanation_correct": "3 bagian dari 8 bagian adalah 3/8.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 3 bagian dari 8 bagian adalah 3/8."
   },
   {
     "id": "q_9",
@@ -130,7 +168,8 @@ const questions = [
       "1"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "1/2 + 1/4 = 2/4 + 1/4 = 3/4."
+    "explanation_correct": "1/2 + 1/4 = 2/4 + 1/4 = 3/4.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 1/2 + 1/4 = 2/4 + 1/4 = 3/4."
   },
   {
     "id": "q_10",
@@ -143,7 +182,8 @@ const questions = [
       "3 5/6"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "2 1/3 + 1 1/2 = 7/3 + 3/2 = 14/6 + 9/6 = 23/6 = 3 5/6."
+    "explanation_correct": "2 1/3 + 1 1/2 = 7/3 + 3/2 = 14/6 + 9/6 = 23/6 = 3 5/6.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 2 1/3 + 1 1/2 = 7/3 + 3/2 = 14/6 + 9/6 = 23/6 = 3 5/6."
   },
   {
     "id": "q_11",
@@ -156,7 +196,8 @@ const questions = [
       "12"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "3/4 × 12 = 36 / 4 = 9."
+    "explanation_correct": "3/4 × 12 = 36 / 4 = 9.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 3/4 × 12 = 36 / 4 = 9."
   },
   {
     "id": "q_12",
@@ -169,7 +210,8 @@ const questions = [
       "10"
     ],
     "correctAnswer": 3,
-    "explanation_correct": "5 : (1/2) = 5 × 2 = 10 kantong."
+    "explanation_correct": "5 : (1/2) = 5 × 2 = 10 kantong.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 5 : (1/2) = 5 × 2 = 10 kantong."
   },
   {
     "id": "q_13",
@@ -182,7 +224,8 @@ const questions = [
       "Dikali 4"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "2 × 3 = 6, 6 × 3 = 18, 18 × 3 = 54."
+    "explanation_correct": "2 × 3 = 6, 6 × 3 = 18, 18 × 3 = 54.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 2 × 3 = 6, 6 × 3 = 18, 18 × 3 = 54."
   },
   {
     "id": "q_14",
@@ -195,7 +238,8 @@ const questions = [
       "64 cm"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Pola dikali 2: 2, 4, 8, 16, 32. Minggu kelima adalah 32."
+    "explanation_correct": "Pola dikali 2: 2, 4, 8, 16, 32. Minggu kelima adalah 32.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Pola dikali 2: 2, 4, 8, 16, 32. Minggu kelima adalah 32."
   },
   {
     "id": "q_15",
@@ -208,7 +252,8 @@ const questions = [
       "Rp 6.000"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "15.000 : 3 = Rp 5.000 per pulpen."
+    "explanation_correct": "15.000 : 3 = Rp 5.000 per pulpen.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 15.000 : 3 = Rp 5.000 per pulpen."
   },
   {
     "id": "q_16",
@@ -221,7 +266,8 @@ const questions = [
       "80 cm"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Keliling = 2 × (p + l) = 2 × (8 + 5) = 2 × 13 = 26 cm."
+    "explanation_correct": "Keliling = 2 × (p + l) = 2 × (8 + 5) = 2 × 13 = 26 cm.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Keliling = 2 × (p + l) = 2 × (8 + 5) = 2 × 13 = 26 cm."
   },
   {
     "id": "q_17",
@@ -234,7 +280,8 @@ const questions = [
       "144 m"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Keliling persegi = 4 × sisi = 4 × 12 = 48 meter."
+    "explanation_correct": "Keliling persegi = 4 × sisi = 4 × 12 = 48 meter.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Keliling persegi = 4 × sisi = 4 × 12 = 48 meter."
   },
   {
     "id": "q_18",
@@ -247,7 +294,8 @@ const questions = [
       "24 m²"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Luas = panjang × lebar = 4 × 3 = 12 m²."
+    "explanation_correct": "Luas = panjang × lebar = 4 × 3 = 12 m².",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Luas = panjang × lebar = 4 × 3 = 12 m²."
   },
   {
     "id": "q_19",
@@ -260,7 +308,8 @@ const questions = [
       "80 cm²"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Luas segitiga = 1/2 × alas × tinggi = 1/2 × 10 × 8 = 40 cm²."
+    "explanation_correct": "Luas segitiga = 1/2 × alas × tinggi = 1/2 × 10 × 8 = 40 cm².",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Luas segitiga = 1/2 × alas × tinggi = 1/2 × 10 × 8 = 40 cm²."
   },
   {
     "id": "q_20",
@@ -273,7 +322,8 @@ const questions = [
       "Pelurus"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Sudut antara 90 dan 180 derajat adalah sudut tumpul."
+    "explanation_correct": "Sudut antara 90 dan 180 derajat adalah sudut tumpul.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Sudut antara 90 dan 180 derajat adalah sudut tumpul."
   },
   {
     "id": "q_21",
@@ -286,7 +336,8 @@ const questions = [
       "150 derajat"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Tiap 1 angka jaraknya 30 derajat. Pukul 03.00 berarti 3 × 30 = 90 derajat."
+    "explanation_correct": "Tiap 1 angka jaraknya 30 derajat. Pukul 03.00 berarti 3 × 30 = 90 derajat.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Tiap 1 angka jaraknya 30 derajat. Pukul 03.00 berarti 3 × 30 = 90 derajat."
   },
   {
     "id": "q_22",
@@ -299,7 +350,8 @@ const questions = [
       "150 cm²"
     ],
     "correctAnswer": 3,
-    "explanation_correct": "Luas permukaan kubus = 6 × s² = 6 × 25 = 150 cm²."
+    "explanation_correct": "Luas permukaan kubus = 6 × s² = 6 × 25 = 150 cm².",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Luas permukaan kubus = 6 × s² = 6 × 25 = 150 cm²."
   },
   {
     "id": "q_23",
@@ -312,7 +364,8 @@ const questions = [
       "200 cm³"
     ],
     "correctAnswer": 3,
-    "explanation_correct": "Volume = p × l × t = 10 × 5 × 4 = 200 cm³."
+    "explanation_correct": "Volume = p × l × t = 10 × 5 × 4 = 200 cm³.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Volume = p × l × t = 10 × 5 × 4 = 200 cm³."
   },
   {
     "id": "q_24",
@@ -325,7 +378,8 @@ const questions = [
       "Trapesium"
     ],
     "correctAnswer": 2,
-    "explanation_correct": "Segitiga adalah poligon dengan 3 sisi dan 3 sudut."
+    "explanation_correct": "Segitiga adalah poligon dengan 3 sisi dan 3 sudut.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Segitiga adalah poligon dengan 3 sisi dan 3 sudut."
   },
   {
     "id": "q_25",
@@ -338,77 +392,88 @@ const questions = [
       "Balok"
     ],
     "correctAnswer": 1,
-    "explanation_correct": "Bola adalah bangun ruang yang tidak bersudut dan terbentuk dari satu sisi lengkung tertutup."
+    "explanation_correct": "Bola adalah bangun ruang yang tidak bersudut dan terbentuk dari satu sisi lengkung tertutup.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Bola adalah bangun ruang yang tidak bersudut dan terbentuk dari satu sisi lengkung tertutup."
   },
   {
     "id": "q_26",
     "type": "essay",
     "question": "Sebuah pabrik roti memproduksi 1.200 roti per hari. Jika roti-roti tersebut akan didistribusikan sama rata ke 8 toko kecil, berapa jumlah roti yang diterima masing-masing toko?",
     "correctAnswer": "150 roti",
-    "explanation_correct": "1.200 : 8 = 150 roti per toko."
+    "explanation_correct": "1.200 : 8 = 150 roti per toko.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 1.200 : 8 = 150 roti per toko."
   },
   {
     "id": "q_27",
     "type": "essay",
     "question": "Bu Rina ingin membungkus 30 pensil dan 45 buku dalam beberapa paket. Berapa banyak paket terbanyak yang bisa dibuat agar setiap paket berisi jumlah pensil dan buku yang sama?",
     "correctAnswer": "15 paket",
-    "explanation_correct": "FPB dari 30 dan 45 adalah 15."
+    "explanation_correct": "FPB dari 30 dan 45 adalah 15.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! FPB dari 30 dan 45 adalah 15."
   },
   {
     "id": "q_28",
     "type": "essay",
     "question": "Dua orang pelari berlari mengitari lapangan. Pelari pertama menyelesaikan satu putaran dalam 6 menit, sedangkan pelari kedua dalam 8 menit. Jika mereka mulai berlari bersama-sama, setelah berapa menit mereka akan bertemu di garis awal untuk pertama kalinya?",
     "correctAnswer": "24 menit",
-    "explanation_correct": "KPK dari 6 dan 8 adalah 24."
+    "explanation_correct": "KPK dari 6 dan 8 adalah 24.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! KPK dari 6 dan 8 adalah 24."
   },
   {
     "id": "q_29",
     "type": "essay",
     "question": "Nita mencampur 1/2 liter sirup jeruk dengan 1/4 liter air matang. Jika Nita meminum 1/8 liter dari campuran tersebut, berapa liter sisa minuman Nita?",
     "correctAnswer": "5/8 liter",
-    "explanation_correct": "1/2 + 1/4 = 3/4 = 6/8. Kemudian 6/8 - 1/8 = 5/8 liter."
+    "explanation_correct": "1/2 + 1/4 = 3/4 = 6/8. Kemudian 6/8 - 1/8 = 5/8 liter.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 1/2 + 1/4 = 3/4 = 6/8. Kemudian 6/8 - 1/8 = 5/8 liter."
   },
   {
     "id": "q_30",
     "type": "essay",
     "question": "Sebuah taman berbentuk persegi panjang berukuran panjang 10 m dan lebar 6 m memiliki sebuah kolam berbentuk lingkaran dengan jari-jari 2 m. Berapa luas taman yang tidak tertutup kolam? (Gunakan pi = 3,14)",
     "correctAnswer": "47,44 m²",
-    "explanation_correct": "Luas taman = 10 x 6 = 60 m². Luas kolam = 3,14 x 2² = 12,56 m². Sisa = 60 - 12,56 = 47,44 m²."
+    "explanation_correct": "Luas taman = 10 x 6 = 60 m². Luas kolam = 3,14 x 2² = 12,56 m². Sisa = 60 - 12,56 = 47,44 m².",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Luas taman = 10 x 6 = 60 m². Luas kolam = 3,14 x 2² = 12,56 m². Sisa = 60 - 12,56 = 47,44 m²."
   },
   {
     "id": "q_31",
     "type": "essay",
     "question": "Sebuah bak mandi berbentuk kubus memiliki panjang rusuk 1 meter. Jika bak tersebut sudah terisi air setengahnya, berapa liter air yang dibutuhkan untuk memenuhi bak mandi tersebut?",
     "correctAnswer": "500 liter",
-    "explanation_correct": "Volume penuh = 1 m x 1 m x 1 m = 1 m³ = 1000 dm³ = 1000 liter. Setengah = 500 liter."
+    "explanation_correct": "Volume penuh = 1 m x 1 m x 1 m = 1 m³ = 1000 dm³ = 1000 liter. Setengah = 500 liter.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Volume penuh = 1 m x 1 m x 1 m = 1 m³ = 1000 dm³ = 1000 liter. Setengah = 500 liter."
   },
   {
     "id": "q_32",
     "type": "essay",
     "question": "Sebutkan 3 karakteristik utama dari sebuah jajar genjang!",
     "correctAnswer": "1. Memiliki 4 sisi, 2. Sisi yang berhadapan sejajar dan sama panjang, 3. Sudut yang berhadapan sama besar.",
-    "explanation_correct": "Karakteristik dasar jajar genjang."
+    "explanation_correct": "Karakteristik dasar jajar genjang.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Karakteristik dasar jajar genjang."
   },
   {
     "id": "q_33",
     "type": "essay",
     "question": "Jelaskan perbedaan mendasar antara persegi dan persegi panjang berdasarkan sifat sisi dan diagonalnya!",
     "correctAnswer": "Persegi memiliki keempat sisi yang sama panjang dan diagonal yang saling tegak lurus, sedangkan persegi panjang hanya sisi berhadapan yang sama panjang dan diagonalnya tidak berpotongan tegak lurus.",
-    "explanation_correct": "Perbandingan sifat persegi dan persegi panjang."
+    "explanation_correct": "Perbandingan sifat persegi dan persegi panjang.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Perbandingan sifat persegi dan persegi panjang."
   },
   {
     "id": "q_34",
     "type": "essay",
     "question": "Diberikan rasio jumlah siswa laki-laki dan perempuan di kelas adalah 2:3. Jika jumlah total siswa adalah 30, hitunglah jumlah masing-masing siswa laki-laki dan perempuan!",
     "correctAnswer": "Laki-laki 12, Perempuan 18",
-    "explanation_correct": "1 bagian rasio = 30 / (2+3) = 6. Laki-laki = 2 x 6 = 12. Perempuan = 3 x 6 = 18."
+    "explanation_correct": "1 bagian rasio = 30 / (2+3) = 6. Laki-laki = 2 x 6 = 12. Perempuan = 3 x 6 = 18.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! 1 bagian rasio = 30 / (2+3) = 6. Laki-laki = 2 x 6 = 12. Perempuan = 3 x 6 = 18."
   },
   {
     "id": "q_35",
     "type": "essay",
     "question": "Bila panjang diameter sebuah tabung adalah 14 cm dan tingginya 20 cm, berapakah volume tabung tersebut? (Gunakan pi = 22/7)",
     "correctAnswer": "3.080 cm³",
-    "explanation_correct": "Jari-jari = 7 cm. Volume = pi x r² x t = 22/7 x 7 x 7 x 20 = 154 x 20 = 3.080 cm³."
+    "explanation_correct": "Jari-jari = 7 cm. Volume = pi x r² x t = 22/7 x 7 x 7 x 20 = 154 x 20 = 3.080 cm³.",
+    "explanation_wrong": "📌 Tips Belajar: Ayo teliti lagi pertanyaannya! Jari-jari = 7 cm. Volume = pi x r² x t = 22/7 x 7 x 7 x 20 = 154 x 20 = 3.080 cm³."
   }
 ];
 
@@ -418,7 +483,7 @@ async function insertSubject() {
     await setDoc(subjRef, {
       title: "Matematika",
       description: "Penilaian Sumatif Kelas Akhir (PSKA) Tahun Ajaran 2025/2026",
-      summary: "<p>Persiapkan diri untuk ujian.</p>",
+      summary: htmlSummary,
       questions: questions,
       isLocked: false
     });
