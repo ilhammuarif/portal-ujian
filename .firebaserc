@@ -1,5 +1,7 @@
 {
-  "projects": {},
+  "projects": {
+    "default": "portal-ujian-sekolah-dbe8e"
+  },
   "targets": {},
   "etags": {}
 }
