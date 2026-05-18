@@ -13,98 +13,416 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const htmlSummary = `
-<div style="font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; line-height: 1.8; color: #334155;">
-  <p style="font-size: 1.2rem; color: #4338ca; font-weight: bold; text-align: center; margin-bottom: 2rem;">
-    Selamat datang di Ujian Matematika! 🔢📐<br/>Ayo asah logika berhitung dan kemampuan analitis kita!
-  </p>
-
-  <div style="background: #eef2ff; border-left: 6px solid #4f46e5; padding: 2rem; border-radius: 1.5rem; margin-bottom: 2rem;">
-    <h3 style="color: #3730a3; margin-top: 0; font-size: 1.5rem; border-bottom: 2px dashed #c7d2fe; padding-bottom: 1rem;">🧮 BAB 1: Bilangan & Operasi Hitung</h3>
-    <ul>
-      <li><b>Operasi Campuran:</b> Ingat aturan KaBaTaKu (Kali, Bagi, Tambah, Kurang). Perkalian dan pembagian dikerjakan terlebih dahulu!</li>
-      <li><b>Pecahan:</b> Menjumlahkan, mengurangkan, dan mengubah pecahan biasa menjadi desimal atau persen.</li>
-      <li><b>Skala & Perbandingan:</b> Jarak pada peta dibagi jarak sebenarnya.</li>
-    </ul>
-  </div>
-
-  <div style="background: #fff7ed; border-left: 6px solid #ea580c; padding: 2rem; border-radius: 1.5rem; margin-bottom: 2rem;">
-    <h3 style="color: #9a3412; margin-top: 0; font-size: 1.5rem; border-bottom: 2px dashed #ffedd5; padding-bottom: 1rem;">📏 BAB 2: Geometri & Pengukuran</h3>
-    <ul>
-      <li><b>Bangun Datar:</b> Menghitung luas persegi, persegi panjang, segitiga, dan lingkaran (Luas = π × r × r).</li>
-      <li><b>Bangun Ruang:</b> Volume kubus (s × s × s) dan balok (p × l × t).</li>
-      <li><b>Kecepatan & Debit:</b> Kecepatan = Jarak ÷ Waktu. Debit = Volume ÷ Waktu.</li>
-    </ul>
-  </div>
-</div>
-`;
 
 const questions = [
   {
-    id: "mtk_q1", type: "pg", level: "L2",
-    question: "Hasil dari 25 + 15 × 4 - 10 adalah...",
-    options: ["150", "75", "15", "85"],
-    correctAnswer: 1,
-    explanation_wrong: "📌 Tips: Aturan perkalian dikerjakan terlebih dahulu. 15 dikali 4 dulu, baru ditambah 25, lalu dikurang 10.",
-    explanation_correct: "Jawaban Benar: B. 75\nPenjelasan: Dikerjakan perkalian dahulu:\n15 × 4 = 60\nLalu penjumlahan: 25 + 60 = 85\nTerakhir pengurangan: 85 - 10 = 75."
+    "id": "q_1",
+    "type": "pg",
+    "question": "Hasil dari 4.567 + 3.214 - 1.234 adalah ...",
+    "options": [
+      "6.547",
+      "6.557",
+      "6.567",
+      "6.577"
+    ],
+    "correctAnswer": 0,
+    "explanation_correct": "4.567 + 3.214 = 7.781. Kemudian 7.781 - 1.234 = 6.547."
   },
   {
-    id: "mtk_q2", type: "pg", level: "L2",
-    question: "Ibu membeli 2,5 kg telur. Karena akan mengadakan hajatan, Ibu membeli lagi 1 1/4 kg telur. Berapa kg total telur ibu sekarang? (Jawab dalam bentuk pecahan desimal)",
-    options: ["3,5 kg", "3,75 kg", "4,25 kg", "3,25 kg"],
-    correctAnswer: 1,
-    explanation_wrong: "📌 Tips: Ubah pecahan campuran 1 1/4 menjadi desimal (1,25), kemudian jumlahkan dengan 2,5.",
-    explanation_correct: "Jawaban Benar: B. 3,75 kg\nPenjelasan: \n1 1/4 = 1,25.\nTotal telur = 2,5 + 1,25 = 3,75 kg."
+    "id": "q_2",
+    "type": "pg",
+    "question": "Pak Budi memanen 2.345 buah apel pada hari pertama dan 1.456 buah pada hari kedua. Jika 500 buah apel busuk, berapa banyak apel yang masih bagus?",
+    "options": [
+      "3.201",
+      "3.301",
+      "3.801",
+      "4.301"
+    ],
+    "correctAnswer": 1,
+    "explanation_correct": "Total panen = 2.345 + 1.456 = 3.801. Apel bagus = 3.801 - 500 = 3.301."
   },
   {
-    id: "mtk_q3", type: "pg", level: "L3",
-    question: "Sebuah peta memiliki skala 1 : 1.500.000. Jika jarak Kota A ke Kota B pada peta adalah 4 cm, berapakah jarak sebenarnya kedua kota tersebut?",
-    options: ["60 km", "6 km", "600 km", "150 km"],
-    correctAnswer: 0,
-    explanation_wrong: "📌 Tips: Rumus Skala = Jarak pada peta / Jarak sebenarnya. Kalikan jarak peta (4 cm) dengan penyebut skala (1.500.000), lalu ubah cm ke km (bagi 100.000).",
-    explanation_correct: "Jawaban Benar: A. 60 km\nPenjelasan: \nJarak sebenarnya = 4 cm × 1.500.000 = 6.000.000 cm.\nUbah ke km: 6.000.000 / 100.000 = 60 km."
+    "id": "q_3",
+    "type": "pg",
+    "question": "Hasil dari 125 × 4 : 5 adalah ...",
+    "options": [
+      "80",
+      "100",
+      "120",
+      "150"
+    ],
+    "correctAnswer": 1,
+    "explanation_correct": "125 × 4 = 500. Kemudian 500 : 5 = 100."
   },
   {
-    id: "mtk_q4", type: "pg", level: "L2",
-    question: "Sebuah bak mandi berbentuk balok memiliki panjang 100 cm, lebar 50 cm, dan tinggi 60 cm. Berapa liter volume bak mandi tersebut jika diisi air penuh? (1 liter = 1000 cm3)",
-    options: ["300 liter", "3.000 liter", "30 liter", "300.000 liter"],
-    correctAnswer: 0,
-    explanation_wrong: "📌 Tips: Volume Balok = p × l × t (cm3). Ingat, bagi hasilnya dengan 1.000 untuk mengubahnya menjadi liter.",
-    explanation_correct: "Jawaban Benar: A. 300 liter\nPenjelasan: \nVolume = 100 × 50 × 60 = 300.000 cm3.\nUbah ke liter = 300.000 / 1000 = 300 liter."
+    "id": "q_4",
+    "type": "pg",
+    "question": "Sebuah toko buku memiliki 12 rak. Setiap rak berisi 45 buku. Jika semua buku akan dimasukkan ke dalam 10 kardus dengan jumlah sama banyak, berapa buku tiap kardus?",
+    "options": [
+      "50",
+      "54",
+      "60",
+      "64"
+    ],
+    "correctAnswer": 1,
+    "explanation_correct": "Total buku = 12 × 45 = 540. Buku tiap kardus = 540 : 10 = 54."
   },
   {
-    id: "mtk_q5", type: "pg", level: "L3",
-    question: "Andi mengendarai sepeda motor dari kota P ke kota Q dengan kecepatan 40 km/jam. Jika jarak kedua kota tersebut 100 km, dan Andi berangkat pukul 08.00, pukul berapakah Andi tiba di kota Q?",
-    options: ["10.00", "10.30", "11.00", "09.30"],
-    correctAnswer: 1,
-    explanation_wrong: "📌 Tips: Waktu = Jarak ÷ Kecepatan. 100 dibagi 40 = 2,5 jam (2 jam 30 menit). Tambahkan waktu ini ke pukul 08.00.",
-    explanation_correct: "Jawaban Benar: B. 10.30\nPenjelasan: \nWaktu tempuh = 100 / 40 = 2,5 jam = 2 jam 30 menit.\nWaktu tiba = 08.00 + 2 jam 30 menit = 10.30."
+    "id": "q_5",
+    "type": "pg",
+    "question": "KPK dari 12 dan 18 dalam bentuk faktorisasi adalah ...",
+    "options": [
+      "2 × 3",
+      "2² × 3²",
+      "2 × 3²",
+      "2² × 3"
+    ],
+    "correctAnswer": 1,
+    "explanation_correct": "Faktorisasi 12 = 2² × 3. Faktorisasi 18 = 2 × 3². KPK = 2² × 3² = 36."
   },
   {
-    id: "mtk_q6", type: "essay", level: "L3",
-    question: "Harga sepasang sepatu di toko adalah Rp250.000,00. Toko tersebut memberikan diskon sebesar 20%. Berapakah uang yang harus dibayarkan jika kamu membeli sepatu tersebut?",
-    explanation_wrong: "📌 Tips: Hitung besar diskon terlebih dahulu (20% dari 250.000). Kemudian, kurangi harga asli sepatu dengan besar diskon.",
-    explanation_correct: "Jawaban Benar: Rp200.000,00\nPenjelasan: \nBesar diskon = 20/100 × 250.000 = 50.000.\nHarga bayar = 250.000 - 50.000 = 200.000."
+    "id": "q_6",
+    "type": "pg",
+    "question": "Ibu memiliki 24 kue cokelat dan 36 kue donat. Kue tersebut akan dibagikan kepada anak-anak dengan jumlah yang sama banyak. Jumlah anak paling banyak yang menerima kue adalah ...",
+    "options": [
+      "6",
+      "8",
+      "12",
+      "18"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "FPB dari 24 dan 36 adalah 12. Jadi paling banyak 12 anak."
   },
   {
-    id: "mtk_q7", type: "essay", level: "L3",
-    question: "Sebuah taman berbentuk lingkaran dengan diameter 28 meter. Jika di sekeliling taman akan ditanami pohon dengan jarak antar pohon 4 meter, berapakah jumlah pohon yang dibutuhkan? (Gunakan π = 22/7)",
-    explanation_wrong: "📌 Tips: Hitung keliling lingkaran (K = π × d). Setelah mendapat kelilingnya (dalam meter), bagi dengan jarak antar pohon (4 meter).",
-    explanation_correct: "Jawaban Benar: 22 pohon\nPenjelasan: \nKeliling = 22/7 × 28 = 88 meter.\nBanyak pohon = 88 meter / 4 meter = 22 pohon."
+    "id": "q_7",
+    "type": "pg",
+    "question": "Lampu A menyala setiap 15 detik, lampu B menyala setiap 20 detik. Kedua lampu akan menyala bersamaan pada detik ke ...",
+    "options": [
+      "30",
+      "45",
+      "60",
+      "80"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "KPK dari 15 dan 20 adalah 60. Mereka menyala bersama tiap 60 detik."
+  },
+  {
+    "id": "q_8",
+    "type": "pg",
+    "question": "Jika sebuah pizza dibagi menjadi 8 bagian sama besar dan Andi memakan 3 bagian, nilai pecahan yang dimakan Andi adalah ...",
+    "options": [
+      "1/8",
+      "3/8",
+      "5/8",
+      "8/3"
+    ],
+    "correctAnswer": 1,
+    "explanation_correct": "3 bagian dari 8 bagian adalah 3/8."
+  },
+  {
+    "id": "q_9",
+    "type": "pg",
+    "question": "Pita Rani panjangnya 1/2 meter. Ia membeli lagi 1/4 meter. Panjang pita Rani sekarang adalah ... meter.",
+    "options": [
+      "1/6",
+      "2/6",
+      "3/4",
+      "1"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "1/2 + 1/4 = 2/4 + 1/4 = 3/4."
+  },
+  {
+    "id": "q_10",
+    "type": "pg",
+    "question": "Hasil dari 2 1/3 + 1 1/2 adalah ...",
+    "options": [
+      "3 1/5",
+      "3 2/5",
+      "3 5/6",
+      "3 5/6"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "2 1/3 + 1 1/2 = 7/3 + 3/2 = 14/6 + 9/6 = 23/6 = 3 5/6."
+  },
+  {
+    "id": "q_11",
+    "type": "pg",
+    "question": "Hasil dari 3/4 × 12 adalah ...",
+    "options": [
+      "6",
+      "8",
+      "9",
+      "12"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "3/4 × 12 = 36 / 4 = 9."
+  },
+  {
+    "id": "q_12",
+    "type": "pg",
+    "question": "Ibu memiliki 5 kg beras yang akan dimasukkan ke dalam kantong plastik yang masing-masing berisi 1/2 kg. Banyak kantong yang dibutuhkan adalah ...",
+    "options": [
+      "2",
+      "5",
+      "8",
+      "10"
+    ],
+    "correctAnswer": 3,
+    "explanation_correct": "5 : (1/2) = 5 × 2 = 10 kantong."
+  },
+  {
+    "id": "q_13",
+    "type": "pg",
+    "question": "Aturan dari pola bilangan 2, 6, 18, 54, ... adalah ...",
+    "options": [
+      "Ditambah 4",
+      "Dikali 2",
+      "Dikali 3",
+      "Dikali 4"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "2 × 3 = 6, 6 × 3 = 18, 18 × 3 = 54."
+  },
+  {
+    "id": "q_14",
+    "type": "pg",
+    "question": "Sebuah tanaman tumbuh 2 cm pada minggu pertama, 4 cm pada minggu kedua, dan 8 cm pada minggu ketiga. Jika pola berlanjut, pertumbuhan minggu kelima adalah ...",
+    "options": [
+      "16 cm",
+      "24 cm",
+      "32 cm",
+      "64 cm"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "Pola dikali 2: 2, 4, 8, 16, 32. Minggu kelima adalah 32."
+  },
+  {
+    "id": "q_15",
+    "type": "pg",
+    "question": "Jika harga 3 buah pulpen adalah Rp 15.000, maka rasio harga per pulpen adalah ...",
+    "options": [
+      "Rp 3.000",
+      "Rp 4.000",
+      "Rp 5.000",
+      "Rp 6.000"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "15.000 : 3 = Rp 5.000 per pulpen."
+  },
+  {
+    "id": "q_16",
+    "type": "pg",
+    "question": "Keliling persegi panjang dengan panjang 8 cm dan lebar 5 cm adalah ...",
+    "options": [
+      "13 cm",
+      "26 cm",
+      "40 cm",
+      "80 cm"
+    ],
+    "correctAnswer": 1,
+    "explanation_correct": "Keliling = 2 × (p + l) = 2 × (8 + 5) = 2 × 13 = 26 cm."
+  },
+  {
+    "id": "q_17",
+    "type": "pg",
+    "question": "Paman membuat taman berbentuk persegi dengan sisi 12 meter. Keliling taman tersebut adalah ...",
+    "options": [
+      "24 m",
+      "36 m",
+      "48 m",
+      "144 m"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "Keliling persegi = 4 × sisi = 4 × 12 = 48 meter."
+  },
+  {
+    "id": "q_18",
+    "type": "pg",
+    "question": "Lantai kamar berbentuk persegi panjang dengan ukuran panjang 4 m dan lebar 3 m. Luas lantai kamar tersebut adalah ...",
+    "options": [
+      "7 m²",
+      "12 m²",
+      "14 m²",
+      "24 m²"
+    ],
+    "correctAnswer": 1,
+    "explanation_correct": "Luas = panjang × lebar = 4 × 3 = 12 m²."
+  },
+  {
+    "id": "q_19",
+    "type": "pg",
+    "question": "Luas sebuah segitiga dengan alas 10 cm dan tinggi 8 cm adalah ...",
+    "options": [
+      "18 cm²",
+      "36 cm²",
+      "40 cm²",
+      "80 cm²"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "Luas segitiga = 1/2 × alas × tinggi = 1/2 × 10 × 8 = 40 cm²."
+  },
+  {
+    "id": "q_20",
+    "type": "pg",
+    "question": "Sudut yang besarnya lebih dari 90 derajat tetapi kurang dari 180 derajat disebut sudut ...",
+    "options": [
+      "Lancip",
+      "Siku-siku",
+      "Tumpul",
+      "Pelurus"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "Sudut antara 90 dan 180 derajat adalah sudut tumpul."
+  },
+  {
+    "id": "q_21",
+    "type": "pg",
+    "question": "Pukul 03.00, jarum panjang dan pendek jam membentuk sudut sebesar ...",
+    "options": [
+      "60 derajat",
+      "90 derajat",
+      "120 derajat",
+      "150 derajat"
+    ],
+    "correctAnswer": 1,
+    "explanation_correct": "Tiap 1 angka jaraknya 30 derajat. Pukul 03.00 berarti 3 × 30 = 90 derajat."
+  },
+  {
+    "id": "q_22",
+    "type": "pg",
+    "question": "Luas permukaan kubus dengan panjang rusuk 5 cm adalah ...",
+    "options": [
+      "25 cm²",
+      "100 cm²",
+      "125 cm²",
+      "150 cm²"
+    ],
+    "correctAnswer": 3,
+    "explanation_correct": "Luas permukaan kubus = 6 × s² = 6 × 25 = 150 cm²."
+  },
+  {
+    "id": "q_23",
+    "type": "pg",
+    "question": "Volume balok dengan panjang 10 cm, lebar 5 cm, dan tinggi 4 cm adalah ...",
+    "options": [
+      "50 cm³",
+      "100 cm³",
+      "150 cm³",
+      "200 cm³"
+    ],
+    "correctAnswer": 3,
+    "explanation_correct": "Volume = p × l × t = 10 × 5 × 4 = 200 cm³."
+  },
+  {
+    "id": "q_24",
+    "type": "pg",
+    "question": "Bangun datar yang memiliki 3 sisi dan 3 titik sudut adalah ...",
+    "options": [
+      "Lingkaran",
+      "Persegi",
+      "Segitiga",
+      "Trapesium"
+    ],
+    "correctAnswer": 2,
+    "explanation_correct": "Segitiga adalah poligon dengan 3 sisi dan 3 sudut."
+  },
+  {
+    "id": "q_25",
+    "type": "pg",
+    "question": "Bangun ruang yang tidak memiliki titik sudut adalah ...",
+    "options": [
+      "Kerucut",
+      "Bola",
+      "Kubus",
+      "Balok"
+    ],
+    "correctAnswer": 1,
+    "explanation_correct": "Bola adalah bangun ruang yang tidak bersudut dan terbentuk dari satu sisi lengkung tertutup."
+  },
+  {
+    "id": "q_26",
+    "type": "essay",
+    "question": "Sebuah pabrik roti memproduksi 1.200 roti per hari. Jika roti-roti tersebut akan didistribusikan sama rata ke 8 toko kecil, berapa jumlah roti yang diterima masing-masing toko?",
+    "correctAnswer": "150 roti",
+    "explanation_correct": "1.200 : 8 = 150 roti per toko."
+  },
+  {
+    "id": "q_27",
+    "type": "essay",
+    "question": "Bu Rina ingin membungkus 30 pensil dan 45 buku dalam beberapa paket. Berapa banyak paket terbanyak yang bisa dibuat agar setiap paket berisi jumlah pensil dan buku yang sama?",
+    "correctAnswer": "15 paket",
+    "explanation_correct": "FPB dari 30 dan 45 adalah 15."
+  },
+  {
+    "id": "q_28",
+    "type": "essay",
+    "question": "Dua orang pelari berlari mengitari lapangan. Pelari pertama menyelesaikan satu putaran dalam 6 menit, sedangkan pelari kedua dalam 8 menit. Jika mereka mulai berlari bersama-sama, setelah berapa menit mereka akan bertemu di garis awal untuk pertama kalinya?",
+    "correctAnswer": "24 menit",
+    "explanation_correct": "KPK dari 6 dan 8 adalah 24."
+  },
+  {
+    "id": "q_29",
+    "type": "essay",
+    "question": "Nita mencampur 1/2 liter sirup jeruk dengan 1/4 liter air matang. Jika Nita meminum 1/8 liter dari campuran tersebut, berapa liter sisa minuman Nita?",
+    "correctAnswer": "5/8 liter",
+    "explanation_correct": "1/2 + 1/4 = 3/4 = 6/8. Kemudian 6/8 - 1/8 = 5/8 liter."
+  },
+  {
+    "id": "q_30",
+    "type": "essay",
+    "question": "Sebuah taman berbentuk persegi panjang berukuran panjang 10 m dan lebar 6 m memiliki sebuah kolam berbentuk lingkaran dengan jari-jari 2 m. Berapa luas taman yang tidak tertutup kolam? (Gunakan pi = 3,14)",
+    "correctAnswer": "47,44 m²",
+    "explanation_correct": "Luas taman = 10 x 6 = 60 m². Luas kolam = 3,14 x 2² = 12,56 m². Sisa = 60 - 12,56 = 47,44 m²."
+  },
+  {
+    "id": "q_31",
+    "type": "essay",
+    "question": "Sebuah bak mandi berbentuk kubus memiliki panjang rusuk 1 meter. Jika bak tersebut sudah terisi air setengahnya, berapa liter air yang dibutuhkan untuk memenuhi bak mandi tersebut?",
+    "correctAnswer": "500 liter",
+    "explanation_correct": "Volume penuh = 1 m x 1 m x 1 m = 1 m³ = 1000 dm³ = 1000 liter. Setengah = 500 liter."
+  },
+  {
+    "id": "q_32",
+    "type": "essay",
+    "question": "Sebutkan 3 karakteristik utama dari sebuah jajar genjang!",
+    "correctAnswer": "1. Memiliki 4 sisi, 2. Sisi yang berhadapan sejajar dan sama panjang, 3. Sudut yang berhadapan sama besar.",
+    "explanation_correct": "Karakteristik dasar jajar genjang."
+  },
+  {
+    "id": "q_33",
+    "type": "essay",
+    "question": "Jelaskan perbedaan mendasar antara persegi dan persegi panjang berdasarkan sifat sisi dan diagonalnya!",
+    "correctAnswer": "Persegi memiliki keempat sisi yang sama panjang dan diagonal yang saling tegak lurus, sedangkan persegi panjang hanya sisi berhadapan yang sama panjang dan diagonalnya tidak berpotongan tegak lurus.",
+    "explanation_correct": "Perbandingan sifat persegi dan persegi panjang."
+  },
+  {
+    "id": "q_34",
+    "type": "essay",
+    "question": "Diberikan rasio jumlah siswa laki-laki dan perempuan di kelas adalah 2:3. Jika jumlah total siswa adalah 30, hitunglah jumlah masing-masing siswa laki-laki dan perempuan!",
+    "correctAnswer": "Laki-laki 12, Perempuan 18",
+    "explanation_correct": "1 bagian rasio = 30 / (2+3) = 6. Laki-laki = 2 x 6 = 12. Perempuan = 3 x 6 = 18."
+  },
+  {
+    "id": "q_35",
+    "type": "essay",
+    "question": "Bila panjang diameter sebuah tabung adalah 14 cm dan tingginya 20 cm, berapakah volume tabung tersebut? (Gunakan pi = 22/7)",
+    "correctAnswer": "3.080 cm³",
+    "explanation_correct": "Jari-jari = 7 cm. Volume = pi x r² x t = 22/7 x 7 x 7 x 20 = 154 x 20 = 3.080 cm³."
   }
 ];
 
-async function insertMtk() {
+async function insertSubject() {
   try {
     const subjRef = doc(db, 'artifacts/portal-ujian-sekolah-dbe8e/public/data/subjects/subject_mtk_2026');
     await setDoc(subjRef, {
       title: "Matematika",
-      description: "Kisi-kisi PSKA Matematika (Kelas 5 & 6). Mencakup Operasi Hitung Campuran, Pecahan, Skala, Geometri (Luas/Volume), dan Kecepatan.",
-      summary: htmlSummary,
+      description: "Penilaian Sumatif Kelas Akhir (PSKA) Tahun Ajaran 2025/2026",
+      summary: "<p>Persiapkan diri untuk ujian.</p>",
       questions: questions,
-      isLocked: false 
+      isLocked: false
     });
-    console.log("SUCCESS: Matematika injected successfully!");
+    console.log("SUCCESS: Matematika Subject injected successfully!");
     process.exit(0);
   } catch (error) {
     console.error("ERROR injecting Matematika:", error);
@@ -112,4 +430,4 @@ async function insertMtk() {
   }
 }
 
-insertMtk();
+insertSubject();
