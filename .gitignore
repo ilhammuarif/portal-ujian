@@ -12,6 +12,19 @@ dist
 dist-ssr
 *.local
 
+# ===================================================
+# FILE RAHASIA — JANGAN PERNAH DIUPLOAD KE GITHUB!
+# ===================================================
+# File .env berisi variabel rahasia seperti API key,
+# password database, dan token akses.
+.env
+.env.*
+
+# serviceAccountKey.json adalah credential admin penuh
+# dari Firebase. Jika bocor, orang bisa akses/hapus
+# seluruh data project Firebase Anda.
+serviceAccountKey.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
