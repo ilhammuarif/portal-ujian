@@ -12,26 +12,32 @@ import {
 } from 'lucide-react';
 
 // --- FIREBASE CONFIGURATION ---
+// Nilai diambil dari environment variables (.env) — tidak hardcode di kode
 const firebaseConfig = {
-  apiKey: "AIzaSyCDnuVE4O1xTh3xs6KVl7CLKarEQxz6ZPM",
-  authDomain: "portal-ujian-sekolah-dbe8e.firebaseapp.com",
-  projectId: "portal-ujian-sekolah-dbe8e",
-  storageBucket: "portal-ujian-sekolah-dbe8e.firebasestorage.app",
-  messagingSenderId: "411411725905",
-  appId: "1:411411725905:web:438cd3ba814d83d43e4270",
-  measurementId: "G-8LHKZ4KY05"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+// Kredensial login diambil dari env — tidak pernah terlihat di kode publik
 const ROLES = {
-  ADMIN: { username: 'ilham', password: '1' },
-  STUDENT: { username: 'najlu', password: '1' }
+  ADMIN: {
+    username: import.meta.env.VITE_ADMIN_USERNAME,
+    password: import.meta.env.VITE_ADMIN_PASSWORD
+  },
+  STUDENT: {
+    username: import.meta.env.VITE_STUDENT_USERNAME,
+    password: import.meta.env.VITE_STUDENT_PASSWORD
+  }
 };
-ROLES.ADMIN.password = '54321';
-ROLES.STUDENT.password = '12345';
 
 // --- MAIN COMPONENT ---
 export default function App() {
