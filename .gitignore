@@ -19,6 +19,7 @@ dist-ssr
 # password database, dan token akses.
 .env
 .env.*
+!.env.example
 
 # serviceAccountKey.json adalah credential admin penuh
 # dari Firebase. Jika bocor, orang bisa akses/hapus

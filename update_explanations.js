@@ -1,13 +1,16 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 
+process.loadEnvFile();
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCDnuVE4O1xTh3xs6KVl7CLKarEQxz6ZPM",
-  authDomain: "portal-ujian-sekolah-dbe8e.firebaseapp.com",
-  projectId: "portal-ujian-sekolah-dbe8e",
-  storageBucket: "portal-ujian-sekolah-dbe8e.firebasestorage.app",
-  messagingSenderId: "411411725905",
-  appId: "1:411411725905:web:438cd3ba814d83d43e4270"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
