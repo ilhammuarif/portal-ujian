@@ -47,9 +47,48 @@
      ```
      Setelah sukses dideploy, skrip `populate_seni.js` dijalankan kembali dan berhasil 100% tanpa hambatan.
 
+
 ## 🚀 Rencana Langkah Berikutnya (Next Steps)
 1. **Pemeriksaan di Sisi Frontend**:
    * Jalankan server pengembangan lokal menggunakan `cmd.exe /c npm run dev` untuk memastikan subjek Seni Rupa sudah muncul di daftar mata pelajaran dan datanya ter-render dengan sempurna.
    * Uji coba simulasi pengerjaan salah satu soal Seni Rupa untuk memastikan tidak ada eror render pada tips belajar (`explanation_wrong`) maupun hasil akhir jawaban.
 2. **Pembersihan Berkas Sementara**:
    * Melakukan pembersihan file temporer jika sudah tidak dibutuhkan demi mematuhi asas *Kebersihan Lokal*.
+
+---
+
+## 🔒 Remediasi Keamanan — Audit Poin 3 (Selesai)
+
+**Tanggal**: 2026-05-21  
+**Status**: ✅ Selesai dan sudah di-push ke GitHub
+
+### Masalah yang Diselesaikan
+Seluruh 12 berkas skrip utilitas pengunggah soal (`populate_*.js`, `update_*.js`, `inject_*.js`) sebelumnya mengandung konfigurasi Firebase (`firebaseConfig`) dengan `apiKey` dan kredensial lain yang di-hardcode langsung di dalam kode — berpotensi bocor ke publik via repositori GitHub.
+
+### Solusi yang Diterapkan
+1. **Pemindahan ke Environment Variables**: Semua nilai di dalam `firebaseConfig` diganti dengan referensi `process.env.*`.
+2. **Native `.env` Loading (Node v24)**: Menggunakan `process.loadEnvFile()` di awal setiap skrip — tanpa dependensi tambahan seperti `dotenv`.
+3. **Template `.env.example`**: Menambahkan berkas template kosong ke repositori sebagai panduan konfigurasi bagi pengembang.
+4. **Perbaikan `.gitignore`**: Menambahkan pengecualian `!.env.example` agar template bisa masuk ke repo tanpa memblokir aturan keamanan `.env.*`.
+
+### Berkas yang Dimodifikasi (12 skrip + 2 konfigurasi)
+- `inject_40_pjok.js`, `populate_bindo.js`, `populate_db.js`, `populate_ipas.js`
+- `populate_mtk.js`, `populate_pjok.js`, `populate_plbj.js`, `populate_seni.js`
+- `update_explanations.js`, `update_explanations_v2.js`, `update_explanations_v3.js`, `update_summary.js`
+- `.gitignore` (pengecualian `.env.example`)
+- `.env.example` (template baru)
+
+### Cara Menjalankan Skrip Setelah Perubahan Ini
+```bash
+# 1. Salin template .env
+cp .env.example .env
+
+# 2. Isi nilai di .env dengan kredensial Firebase Anda
+# FIREBASE_API_KEY=...
+# FIREBASE_AUTH_DOMAIN=...
+# dst.
+
+# 3. Jalankan skrip seperti biasa
+node populate_seni.js
+```
+
